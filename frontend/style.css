@@ -1,0 +1,107 @@
+
+.hand-cursor {
+    cursor: pointer;
+}
+
+.black-button {
+    font-family: Lucida Sans Unicode;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+}
+
+.header {
+  background-color: black;
+}
+
+.header span {
+  color: white;
+  font-size: 16pt;
+}
+
+span#header_span a {
+  color: white;
+  text-decoration: none;
+}
+
+span#header_span a:hover {
+  color: #FF9A00;
+  text-decoration: underline;
+  opacity: 1;
+}
+
+#vehicle-table {
+  text-align: center;
+  border-collapse: separate;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  border-spacing: 5px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#vehicle-table td {
+  padding: 5px 10px 5px 10px;
+  border: 2px dashed rgb(200, 200, 200);
+}
+
+#vehicle-table thead {
+  font-weight: 900;
+}
+
+#filter-div {
+  border: 2px dashed rgb(200, 200, 200);
+  padding: 5px;
+  border-radius: 10px;
+}
+
+#filter-div>table td:first-of-type {
+  padding-right: 15px;
+}
+
+#filter-div * {
+  width: 100%;
+}
+
+#filter-button {
+  min-width: 75px;
+  padding: 4px 7px 4px 7px;
+}
+
+#filter-field {
+  font-family: 'Courier New', Courier, monospace;
+  font-style: italic;
+}
+
+td[sort-order="asc"]::after {
+  content: ' \25B2';
+}
+
+td[sort-order="desc"]::after {
+  content: ' \25BC';
+}
+
+td[sort-order="none"]::after {
+  content: '';
+}
+
+
+button.black-button[disabled] {
+  background-color: rgba(0, 0, 0, 0.6);
+  cursor: not-allowed;
+}
+
+#replace {
+  padding: 15px;
+  margin: 10px;
+  border: 3px solid rgb(112 115 117);
+  border-radius: 10px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#delete-id-field, #patch-id-field {
+  min-width: 195px;
+}
+
+#replace-id-field {
+  min-width: 200px;
+}

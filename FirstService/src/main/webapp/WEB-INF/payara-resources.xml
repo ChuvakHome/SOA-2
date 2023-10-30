@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources PUBLIC "-//Payara.fish//DTD Payara Server 4 Resource Definitions//EN" "https://raw.githubusercontent.com/payara/Payara-Server-Documentation/master/schemas/payara-resources_1_6.dtd">
+<resources>
+    <jdbc-resource pool-name="labDB" jndi-name="java:app/jdbc/app" enabled="true" ></jdbc-resource>
+
+    <jdbc-connection-pool datasource-classname="com.zaxxer.hikari.HikariDataSource" 
+                          name="labDB" 
+                          res-type="javax.sql.DataSource">
+      <property name="User" value="aaamoj"></property>
+      <property name="Password" value=""></property>
+      <!--<property name="DatabaseName" value="aaamoj"></property>-->
+      <!-- <property name="ServerName" value="127.0.0.1"></property>
+      <property name="PortNumber" value="5432"></property>-->
+      <property name="URL" value="jdbc:postgresql://localhost:5432/aaamoj"/>
+      <property name="driverClass" value="org.postgresql.Driver"/>
+    </jdbc-connection-pool>  
+</resources>

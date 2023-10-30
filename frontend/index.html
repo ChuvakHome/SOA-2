@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Lab2</title>
+</head>
+<body>
+	<header>
+			<div class="header">
+					<span id="header_span">
+						<font face="serif">
+                            <a href="https://se.ifmo.ru/courses/soa">Сервис-ориентированная архитектура</a>, ЛР №2
+                            <br>
+							<a target="_blank" href="https://vk.com/timurdemenev">Деменев Тимур</a> P34101
+							<br>
+							Вариант 10121
+						</font>
+					</span>
+			</div>
+	</header>
+    <br>
+    <div>
+        <label for="page-number-field">Current page:</label>
+        <input id="page-number-field" value="1">
+        <label for="page-size-field">Page size:</label>
+        <input id="page-size-field" value="10">
+        <br>
+        <button id="reload-button" class="black-button hand-cursor" onclick="onReload()">&#x21bb;</button>
+    </div>
+    <br>
+    <div id="filter-div">
+        <table>
+            <tr>
+                <td>
+                    <input oninput="disableRelatedButton(event)" related-button-id="filter-button" id="filter-field" placeholder="Enter filter query" type="text"/>
+                </td>
+                <td>
+                    <button id="filter-button" class="black-button hand-cursor" disabled onclick="doFilter()">Filter</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br>
+	<div id="content">
+        <div id="page">
+            <table align="center" id="vehicle-table">
+                <thead>
+                    <tr>
+                        <td class="hand-cursor" sort-order="none" entity-field="id" onclick="doSort(event)">id</td>
+                        <td class="hand-cursor" sort-order="none" entity-field="name" onclick="doSort(event)">name</td>
+                        <td class="hand-cursor" sort-order="none" entity-field="coordinates.x" onclick="doSort(event)">coordinates.x</td>
+                        <td class="hand-cursor" sort-order="none" entity-field="coordinates.y" onclick="doSort(event)">coordinates.y</td>
+                        <td class="hand-cursor" sort-order="none" entity-field="creationDate" onclick="doSort(event)">creationDate</td>
+                        <td class="hand-cursor" sort-order="none" entity-field="enginePower" onclick="doSort(event)">enginePower</td>
+                        <td class="hand-cursor" sort-order="none" entity-field="numberOfWheels" onclick="doSort(event)">numberOfWheels</td>
+                        <td class="hand-cursor" sort-order="none" entity-field="distanceTravelled" onclick="doSort(event)">distanceTravelled</td>
+                        <td class="hand-cursor" sort-order="none" entity-field="fuelType" onclick="doSort(event)">fuelType</td>
+                    </tr>
+                </thead>
+                <th>
+                <tbody id="table-content">
+
+                </tbody>
+            </table>
+        </div>
+        <div id="pagination">
+            <table>
+                <tr>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div id="control-div">
+            <div>
+                <div id="delete">
+                    <table>
+                        <tr>
+                            <td>
+                                <input oninput="disableRelatedButton(event)" related-button-id="delete-button" id="delete-id-field" placeholder="Enter id of element to deleting" type="number"/>
+                            </td>
+                            <td>
+                                <button id="delete-button" class="black-button hand-cursor" disabled onclick="doDelete()">Delete</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="replace">
+                    <table>
+                        <tr>
+                            <td>name</td>
+                            <td>
+                                <input id="replace-field-name" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>coordinates.x</td>
+                            <td>
+                                <input id="replace-field-coordinates-x" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>coordinates.y</td>
+                            <td>
+                                <input id="replace-field-coordinates-y" type="number">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>enginePower</td>
+                            <td>
+                                <input id="replace-field-engine-power" type="number">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>numberOfWheels</td>
+                            <td>
+                                <input id="replace-field-number-of-wheels" type="number">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>distanceTravelled</td>
+                            <td>
+                                <input id="replace-field-distance-travelled" type="number">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>fuelType</td>
+                            <td>
+                                <input id="replace-field-fuel-type" type="text">
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td>
+                                <input oninput="disableRelatedButton(event)" related-button-id="replace-button" id="replace-id-field" placeholder="Enter id of element to replacing" type="number"/>
+                            </td>
+                            <td>
+                                <button id="replace-button" class="black-button hand-cursor" disabled onclick="doReplace()">Replace</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="patch">
+                    <table id="patch-record-table">
+
+                    </table>
+                    <table>
+                        <tr>
+                            <td>
+                                <button class="hand-cursor black-button" onclick="addPatchRecord()">+</button>
+                            </td>
+                            <td>
+                                <input oninput="disableRelatedButton(event)" related-button-id="patch-button" id="patch-id-field" placeholder="Enter id of element to patching" type="number"/>
+                            </td>
+                            <td>
+                                <button id="patch-button" class="black-button hand-cursor" disabled onclick="doPatch()">Patch</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="averageNumberOfWheels">
+                    <table>
+                        <tr>
+                            <td>
+                                <button id="average-number-of-wheels-button" class="black-button hand-cursor" onclick="calculateAverageNumberOfWheels()">Calculate</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Average Number Of Wheels: <span id="avg-number-span"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <span>Delete by Engine Power: </span>
+                    <input id="delete-by-engine-power-field" oninput="disableRelatedButton(event)" related-button-id="delete-by-engine-power-button" type="number">
+                    <br>
+                    <button id="delete-by-engine-power-button" class="hand-cursor black-button" onclick="onDeleteByEnginePowerButton()">Delete by Engine Power</button>
+                </div>
+                <div>
+                    <span>Fuel Type less than: </span>
+                    <input id="fuel-type-less-field" oninput="disableRelatedButton(event)" related-button-id="fuel-type-less-button">
+                    <br>
+                    <button id="fuel-type-less-button" class="hand-cursor black-button" onclick="onFuelTypeLessButton()">Get vehicles fuel type less</button>
+                </div>
+                    <div><span>Fix distance: </span>
+                    <input id="fix-distance-field" oninput="disableRelatedButton(event)" related-button-id="fix-distance-button" type="number">
+                    <br>
+                    <button id="fix-distance-button" class="hand-cursor black-button" onclick="fixDistance()">Fix distance</button>
+                </div>
+                <div>
+                    <span>Add wheels: </span>
+                    <label for="add-wheels-id-field">Id</label>
+                    <input id="add-wheels-id-field" oninput="disableRelatedButton(event)" related-button-id="add-wheels-button">
+                    <br>
+                    <label for="add-wheels-field">Number of wheels</label>
+                    <input id="add-wheels-field" oninput="disableRelatedButton(event)" related-button-id="add-wheels-button">
+                    <br>
+                    <button id="add-wheels-button" class="hand-cursor black-button" onclick="addWheels()">Add wheels</button>
+                </div>
+            </div>
+        </div>
+
+	</div>
+    <template id="template-row">
+      <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+    </template>
+    <template id="template-patch">
+        <tr>
+            <td>
+                <input/>
+            </td>
+            <td>
+                <input/>
+            </td>
+        </tr>
+    </template>
+	<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
